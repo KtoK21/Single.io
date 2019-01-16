@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2141670573436858042}
   - component: {fileID: 7956732231959831840}
   - component: {fileID: 578684204231158289}
-  - component: {fileID: 2033144875387755869}
-  - component: {fileID: 8212265071631849993}
   - component: {fileID: 3924282116880513916}
+  - component: {fileID: 1527703676134967483}
+  - component: {fileID: 2033144875387755869}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2b10666e4f0aa4747849997afdbabf3d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e51a856dd2c3d0d48b93b31118dcd29d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,32 +99,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.43
---- !u!114 &2033144875387755869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6940814575270027036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5d01aa88c4d4504981925435d16ad2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetBackground: {fileID: 0}
-  Size: 2
---- !u!114 &8212265071631849993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6940814575270027036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06450999aa3ce094b972456720da0839, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &3924282116880513916
 Rigidbody2D:
   serializedVersion: 4
@@ -146,3 +120,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1527703676134967483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6940814575270027036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d6b2c62847df8439ab410a7e2a04cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: 2
+  Speed: 5
+  Name: Test
+--- !u!114 &2033144875387755869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6940814575270027036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5d01aa88c4d4504981925435d16ad2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetBackground: {fileID: 0}

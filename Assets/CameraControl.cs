@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    public GameObject targetBackground;
-
     Vector3 minBound;
     Vector3 maxBound;
 
@@ -16,10 +14,9 @@ public class CameraControl : MonoBehaviour
     void Start()
     {
 
-        minBound = targetBackground.GetComponent<BoxCollider2D>().bounds.min;
-        maxBound = targetBackground.GetComponent<BoxCollider2D>().bounds.max;
-        halfHeight = transform.GetComponent<Camera>().orthographicSize;
+        halfHeight = GetComponent<Camera>().orthographicSize;
         halfWidth = halfHeight * Screen.width / Screen.height;
+        transform.position = transform.parent.position;
     }
 
     // Update is called once per frame
@@ -30,5 +27,12 @@ public class CameraControl : MonoBehaviour
         float Yclamp = Mathf.Clamp(transform.parent.transform.position.y, minBound.y + halfHeight, maxBound.y - halfHeight);
 
         transform.position = new Vector3(Xclamp, Yclamp, -10);
-    }   
+        GetComponent<Camera>().orthographicSize = 1 + GetComponentInParent<SlimeManage>().Size *1.5f;
+    }
+
+    public void GetMapBound(Vector3 minBoundparam, Vector3 maxBoundparam)
+    {
+        minBound = minBoundparam;
+        maxBound = maxBoundparam;
+    }
 }
