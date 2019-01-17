@@ -27,7 +27,10 @@ public class CameraControl : MonoBehaviour
         float Yclamp = Mathf.Clamp(transform.parent.transform.position.y, minBound.y + halfHeight, maxBound.y - halfHeight);
 
         transform.position = new Vector3(Xclamp, Yclamp, -10);
-        GetComponent<Camera>().orthographicSize = 1 + GetComponentInParent<SlimeManage>().Size *1.5f;
+
+        //플레이어의 크기가 커질수록 카메라가 줌아웃.
+        //최대 줌아웃은 15
+        GetComponent<Camera>().orthographicSize = Mathf.Clamp(1 + GetComponentInParent<SlimeManage>().Size * 0.5f, 1, 15);
     }
 
     public void GetMapBound(Vector3 minBoundparam, Vector3 maxBoundparam)

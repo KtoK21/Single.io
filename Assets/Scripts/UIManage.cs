@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class UIManage : MonoBehaviour
 {
 
@@ -12,6 +11,9 @@ public class UIManage : MonoBehaviour
     public GameObject Canvas;
     public GameObject HomeUI;
     public GameObject IngameUI;
+    public GameObject DebugUI;
+
+    public Text PlanktonCountText;
 
     private void Awake()
     {
@@ -32,6 +34,7 @@ public class UIManage : MonoBehaviour
             IngameUI.SetActive(true);
         }
 
+        PlanktonCountText.text = GetComponent<Generator>().GetPlanktonCount().ToString();
 
     }
 
@@ -39,11 +42,17 @@ public class UIManage : MonoBehaviour
     {
         //HomeUI 비활성화 후 Ingame Scene 로드
         HomeUI.SetActive(!HomeUI.activeSelf);
+        DebugUI.SetActive(!DebugUI.activeSelf);
 
         StartCoroutine(StartGameCoroutine());
-
+        
   
     }
+
+    /*문제점! 이 코루틴에서 마지막의 InitiateGame()이 먼저 실행되고 그 윗줄의
+     * Debug.Log가 실행된다. 뭐지?????
+     */
+
     IEnumerator StartGameCoroutine()
     {
         SceneManager.LoadScene("Ingame");
@@ -52,5 +61,24 @@ public class UIManage : MonoBehaviour
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("Ingame"));
         Debug.Log("Ingame loaded & active");
         GetComponent<Generator>().InitiateGame();
+    }
+
+    public void GetAICount(int param)
+    {
+        GetComponent<DifficultyInfo>().AICount = (param + 1) * 5;
+    }
+
+    public void GetMapSize(int param)
+    {
+        int MapSize = (param * 4) + 8;
+        GetComponent<DifficultyInfo>().MapSize = MapSize;
+        GetComponent<Generator>().MapFix(MapSize);
+    }
+
+    public void GetPlanktonCount(Slider slider)
+    {
+
+        GetComponent<DifficultyInfo>().PlanktonCount = (int)slider.value;
+        slider.transform.Find("CountText").GetComponent<Text>().text = slider.value.ToString();
     }
 }
