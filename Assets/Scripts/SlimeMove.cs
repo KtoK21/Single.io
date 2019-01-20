@@ -7,13 +7,16 @@ using UnityEngine;
 //같아야 하기 때문.
 public class SlimeMove : MonoBehaviour
 {
-    protected Vector3 minBound;
-    protected Vector3 maxBound;
+    Vector3 minBound;
+    Vector3 maxBound;
 
-    
+  
     // Start is called before the first frame update
     void Start()
     {
+
+        //minBound = GameObject.Find("GameManager").GetComponent<Generator>().Background.GetComponent<BoxCollider2D>().bounds.min;
+        //maxBound = GameObject.Find("GameManager").GetComponent<Generator>().Background.GetComponent<BoxCollider2D>().bounds.max;
     }
 
     // Update is called once per frame
@@ -40,7 +43,7 @@ public class SlimeMove : MonoBehaviour
         transform.position = new Vector3(Xclamp, Yclamp, 0);
     }
 
-    public void GetMapBound(Vector3 minBoundparam, Vector3 maxBoundparam)
+    public void SetMapBound(Vector3 minBoundparam, Vector3 maxBoundparam)
     {
         minBound = minBoundparam;
         maxBound = maxBoundparam;

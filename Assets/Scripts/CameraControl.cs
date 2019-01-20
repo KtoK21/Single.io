@@ -13,6 +13,8 @@ public class CameraControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        minBound = GameObject.Find("GameManager").GetComponent<Generator>().Background.GetComponent<BoxCollider2D>().bounds.min;
+        maxBound = GameObject.Find("GameManager").GetComponent<Generator>().Background.GetComponent<BoxCollider2D>().bounds.max;
 
         halfHeight = GetComponent<Camera>().orthographicSize;
         halfWidth = halfHeight * Screen.width / Screen.height;
@@ -33,7 +35,7 @@ public class CameraControl : MonoBehaviour
         GetComponent<Camera>().orthographicSize = Mathf.Clamp(1 + GetComponentInParent<SlimeManage>().Size * 0.5f, 1, 15);
     }
 
-    public void GetMapBound(Vector3 minBoundparam, Vector3 maxBoundparam)
+    public void SetMapBound(Vector3 minBoundparam, Vector3 maxBoundparam)
     {
         minBound = minBoundparam;
         maxBound = maxBoundparam;

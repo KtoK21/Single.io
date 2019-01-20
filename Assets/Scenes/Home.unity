@@ -2176,7 +2176,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1687577496}
-        m_MethodName: GetMapSize
+        m_MethodName: SetMapSize
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2734,7 +2734,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1687577496}
-        m_MethodName: GetAICount
+        m_MethodName: SetAICount
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2912,7 +2912,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1687577496}
-        m_MethodName: GetPlanktonCount
+        m_MethodName: SetPlanktonCount
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1545365919}

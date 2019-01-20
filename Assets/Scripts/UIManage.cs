@@ -49,10 +49,6 @@ public class UIManage : MonoBehaviour
   
     }
 
-    /*문제점! 이 코루틴에서 마지막의 InitiateGame()이 먼저 실행되고 그 윗줄의
-     * Debug.Log가 실행된다. 뭐지?????
-     */
-
     IEnumerator StartGameCoroutine()
     {
         SceneManager.LoadScene("Ingame");
@@ -63,21 +59,20 @@ public class UIManage : MonoBehaviour
         GetComponent<Generator>().InitiateGame();
     }
 
-    public void GetAICount(int param)
+    public void SetAICount(int param)
     {
         GetComponent<DifficultyInfo>().AICount = (param + 1) * 5;
     }
 
-    public void GetMapSize(int param)
+    public void SetMapSize(int param)
     {
         int MapSize = (param * 4) + 8;
         GetComponent<DifficultyInfo>().MapSize = MapSize;
         GetComponent<Generator>().MapFix(MapSize);
     }
 
-    public void GetPlanktonCount(Slider slider)
+    public void SetPlanktonCount(Slider slider)
     {
-
         GetComponent<DifficultyInfo>().PlanktonCount = (int)slider.value;
         slider.transform.Find("CountText").GetComponent<Text>().text = slider.value.ToString();
     }

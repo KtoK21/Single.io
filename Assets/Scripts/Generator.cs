@@ -20,12 +20,13 @@ public class Generator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //MapFix(GetComponent<DifficultyInfo>().MapSize);
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Background.GetComponent<BoxCollider2D>().bounds.min);
         //맵에 생성된 총 플랑크톤의 갯수를 항상 일정하게 유지한다.
         if (SceneManager.GetActiveScene().name == "Ingame" && !UIManage.IsGameOver)
         {
@@ -45,7 +46,7 @@ public class Generator : MonoBehaviour
             GameObject AISlime =Instantiate(AISlimePrefab, RandomPosGen(), Quaternion.identity).gameObject;
             AISlimes.Add(AISlime);
             //생성된 슬라임에게 맵 사이즈를 알려줌
-            AISlime.GetComponent<SlimeMove>().GetMapBound(minBound, maxBound);
+            //AISlime.GetComponent<SlimeMove>().SetMapBound(minBound, maxBound);
         }
     }
     
@@ -55,9 +56,9 @@ public class Generator : MonoBehaviour
         GameObject PlayerSlime = Instantiate(PlayerSlimePrefab, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
 
         //플레이어 슬라임에게 맵 사이즈를 알려줌
-        PlayerSlime.GetComponent<SlimeMove>().GetMapBound(Background.GetComponent<BoxCollider2D>().bounds.min, Background.GetComponent<BoxCollider2D>().bounds.max);
+        //PlayerSlime.GetComponent<SlimeMove>().SetMapBound(Background.GetComponent<BoxCollider2D>().bounds.min, Background.GetComponent<BoxCollider2D>().bounds.max);
         //플레이어 슬라임에 붙은 카메라에게 맵 사이즈를 알려줌
-        PlayerSlime.transform.GetChild(0).GetComponent<CameraControl>().GetMapBound(minBound, maxBound);
+        //PlayerSlime.transform.GetChild(0).GetComponent<CameraControl>().SetMapBound(minBound, maxBound);
     }
 
     //플랑크톤을 생성. PlanktonCount 의 값만큼 새 플랑크톤을 생성한다.
@@ -81,8 +82,8 @@ public class Generator : MonoBehaviour
     //min +1 ~ max -1 의 범위를 사용.
     Vector3 RandomPosGen()
     {
-        Debug.Log("Minbound : " + minBound + ", Maxbound : " + maxBound);
-        Vector3 Pos = new Vector3(Random.Range(minBound.x + 1, maxBound.x - 1), Random.Range(minBound.y + 1, maxBound.y - 1), 0);
+        
+        Vector3 Pos = new Vector3(Random.Range(Background.GetComponent<BoxCollider2D>().bounds.min.x + 1, Background.GetComponent<BoxCollider2D>().bounds.max.x - 1), Random.Range(Background.GetComponent<BoxCollider2D>().bounds.min.y + 1, Background.GetComponent<BoxCollider2D>().bounds.max.y - 1), 0);
 
         return Pos;
     }
@@ -94,37 +95,49 @@ public class Generator : MonoBehaviour
 
     public void DestroyfromList(GameObject target, string type)
     {
-        if(type == "AISlime")
+        if (target != null)
         {
-            Destroy(target);
-            if (AISlimes.Contains(target))
+            if (type == "AISlime")
             {
-                AISlimes.Remove(target);
+                Destroy(target);
+                if (AISlimes.Contains(target))
+                {
+                    AISlimes.Remove(target);
+                }
             }
-        }
-        else if (type == "Plankton")
-        {
-            Destroy(target);
-            if (Planktons.Contains(target))
+            else if (type == "Plankton")
             {
-                Planktons.Remove(target);
+                Destroy(target);
+                if (Planktons.Contains(target))
+                {
+                    Planktons.Remove(target);
+                }
             }
         }
     }
 
-    /*문제점! minBound와 maxBound가 제대로 설정되지 않는다. 정확히는 처음에 게임이 시작할 때
-     *의 Bound를 그대로 가지고 있는다. InitiateGame이 작동된 후에는 잘 바뀌어서 로그도 정상
-     * 적으로 나오는데, InitiateGame을 하기전에 값을 바꿔야 한다. 
+    /*문제점 업데이트! 정확한 문제를 찾았다. Background 의 LocalScale을 바꾸고 나서
+     * minBound, maxBound를 Background의 Boxcollider2D.bound의 min, max값으로 업데이트할때,
+     * Background.GetComponent<BoxCollider2D>().bounds.min , max값이 업데이트되어있지 않다.
+     * Update()에서도 같은 Debug.log를 출력하게 해보니, 함수 호출이 끝나고나서 한 프레임
+     * 후부터 의도했던 결과값을 출력한다. 
+     * 
+     * localScale의 업데이트가 bound.min을 호출할때까지 끝나지 않아서 생기는 문제인듯.
+     * MapFix 함수가 끝나고 한 프레임이 지날때까지 업데이트가 안된다.
      */
 
 
     // Background의 크기를 local scale로 조정. MapSize의 값만큼 scale을 늘린다.
     public void MapFix(int MapSize)
     {
-
         Background.transform.localScale = new Vector3(MapSize, MapSize, 1);
-        minBound = Background.GetComponent<BoxCollider2D>().bounds.min;
+
+        Debug.Log(Background.GetComponent<BoxCollider2D>().bounds.min);
+
+        minBound = Background.GetComponent < BoxCollider2D>().bounds.min;
         maxBound = Background.GetComponent<BoxCollider2D>().bounds.max;
+
+        Debug.Log(Background.GetComponent<BoxCollider2D>().bounds.min);
     }
 
 }
