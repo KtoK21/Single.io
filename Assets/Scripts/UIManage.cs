@@ -7,7 +7,7 @@ public class UIManage : MonoBehaviour
 
     public static bool IsGameOver = false;
     public static bool IsGenerating = false;
-
+    public static bool IsGameClear = false;
     public GameObject Canvas;
     public GameObject HomeUI;
     public GameObject IngameUI;
@@ -31,7 +31,12 @@ public class UIManage : MonoBehaviour
     {
         if (IsGameOver)
         {
-            IngameUI.SetActive(true);
+            IngameUI.transform.Find("GameOver").gameObject.SetActive(true);
+        }
+
+        else if (IsGameClear)
+        {
+            IngameUI.transform.Find("GameClear").gameObject.SetActive(true);
         }
 
         PlanktonCountText.text = GetComponent<Generator>().GetPlanktonCount().ToString();

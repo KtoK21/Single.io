@@ -9,24 +9,33 @@ public class SlimeManage : MonoBehaviour
     public float Speed;
     public string Name;
 
-    public SlimeManage()
+    private void Start()
     {
-        Size = 2.0f;
-        Speed = 5.0f;
-        Name = "Test";
+        if(transform.tag == "Heroparty")
+        {
+            Size = Random.Range(20, 40);
+        }
     }
-
     private void Update()
     {
-        //슬라임의 크기를 현재 사이즈에 비례하게 설정
-        //최대 크기 제한 => 40
-        float slimeSize = Mathf.Clamp(1 + Size / 5, 1, 40);
-        transform.localScale = new Vector3(slimeSize, slimeSize, slimeSize);
-
-        //한 슬라임의 크기가 40이 되면 게임 오버(맵을 전부 덮음)
-        if(Size == 40)
+        //오브젝트가 용사일 경우
+        if (transform.tag == "Heroparty")
         {
-            UIManage.IsGameOver = true;
+
+        }
+        //AI 슬라임 혹은 플레이어 슬라임일 경우
+        else
+        {
+            //슬라임의 크기를 현재 사이즈에 비례하게 설정
+            //최대 크기 제한 => 50
+            float slimeSize = Mathf.Clamp(1 + Size / 5, 1, 50);
+            transform.localScale = new Vector3(slimeSize, slimeSize, slimeSize);
+
+            //한 슬라임의 크기가 40이 되면 게임 오버(맵을 전부 덮음)
+            if (Size == 50)
+            {
+                UIManage.IsGameOver = true;
+            }
         }
     }
 
@@ -54,6 +63,16 @@ public class SlimeManage : MonoBehaviour
             if (transform.tag == "Player")
             {
                 UIManage.IsGameOver = true;
+            }
+            //본인이 용사면
+            else if(transform.tag == "Heroparty")
+            {
+                //플레이어가 잡아먹을 경우 게임 클리어
+                if (collision.tag == "Player")
+                    UIManage.IsGameClear = true;
+                //AI가 잡아먹을 경우 게임 오버
+                else
+                    UIManage.IsGameOver = true;
             }
 
             //본인이 AI면 오브젝트 삭제

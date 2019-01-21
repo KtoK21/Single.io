@@ -14,9 +14,6 @@ public class SlimeMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        //minBound = GameObject.Find("GameManager").GetComponent<Generator>().Background.GetComponent<BoxCollider2D>().bounds.min;
-        //maxBound = GameObject.Find("GameManager").GetComponent<Generator>().Background.GetComponent<BoxCollider2D>().bounds.max;
     }
 
     // Update is called once per frame
