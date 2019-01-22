@@ -81,4 +81,8 @@ public class UIManage : MonoBehaviour
         GetComponent<DifficultyInfo>().PlanktonCount = (int)slider.value;
         slider.transform.Find("CountText").GetComponent<Text>().text = slider.value.ToString();
     }
+    void DebugTimex5()
+    {
+        GetComponent<Generator>().SetSlimeSpeed(25);
+    }
 }

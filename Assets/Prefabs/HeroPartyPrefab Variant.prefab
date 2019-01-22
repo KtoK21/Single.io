@@ -78,5 +78,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 3b69baa8b5d93614fa32df47cc1f53d0,
         type: 3}
+    - target: {fileID: 1527703676134967483, guid: 9c263a2d22f9b234e89f651365d65458,
+        type: 3}
+      propertyPath: Speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3655676195660954209, guid: 9c263a2d22f9b234e89f651365d65458,
+        type: 3}
+      propertyPath: m_TagString
+      value: Heroparty
+      objectReference: {fileID: 0}
+    - target: {fileID: 6634919172369986448, guid: 9c263a2d22f9b234e89f651365d65458,
+        type: 3}
+      propertyPath: m_TagString
+      value: Heroparty
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c263a2d22f9b234e89f651365d65458, type: 3}

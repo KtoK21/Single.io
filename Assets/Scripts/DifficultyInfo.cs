@@ -15,6 +15,6 @@ public class DifficultyInfo : MonoBehaviour
     {
         AICount = 5;
         MapSize = 8;
-        PlanktonCount = 30;
+        PlanktonCount = 10;
     }
 }

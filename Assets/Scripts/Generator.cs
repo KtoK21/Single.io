@@ -18,6 +18,7 @@ public class Generator : MonoBehaviour
 
     Vector3 minBound;
     Vector3 maxBound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,12 +32,14 @@ public class Generator : MonoBehaviour
     {
 
         //맵에 생성된 총 플랑크톤의 갯수를 항상 일정하게 유지한다.
+        
         if (SceneManager.GetActiveScene().name == "Ingame" && !UIManage.IsGameOver)
         {
             int PlanktonDiff = GetComponent<DifficultyInfo>().PlanktonCount - Planktons.Count;
             if (PlanktonDiff != 0)
                 PlanktonGen(PlanktonDiff);
         }
+        
     }
 
     // AI슬라임들을 생성. AICount 의 값만큼 새 AI슬라임을 생성한다.
@@ -87,9 +90,9 @@ public class Generator : MonoBehaviour
 
     public void InitiateGame()
     {
-        PlayerGen();
+        //PlayerGen();
         AISlimeGen(GetComponent<DifficultyInfo>().AICount);
-        HeroPartyGen();
+       // HeroPartyGen();
     }
     
     //Background의 범위 안에서 랜덤한 Vector3 생성. 벽에 딱 달라붙는 것을 제외하기 위해
@@ -127,6 +130,14 @@ public class Generator : MonoBehaviour
                     Planktons.Remove(target);
                 }
             }
+        }
+    }
+
+    public void SetSlimeSpeed(int speed)
+    {
+        foreach(GameObject obj in AISlimes)
+        {
+            obj.GetComponent<SlimeManage>().Speed = speed;
         }
     }
 
