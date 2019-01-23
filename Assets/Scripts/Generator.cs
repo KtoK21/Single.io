@@ -90,9 +90,9 @@ public class Generator : MonoBehaviour
 
     public void InitiateGame()
     {
-        //PlayerGen();
+        PlayerGen();
         AISlimeGen(GetComponent<DifficultyInfo>().AICount);
-       // HeroPartyGen();
+        HeroPartyGen();
     }
     
     //Background의 범위 안에서 랜덤한 Vector3 생성. 벽에 딱 달라붙는 것을 제외하기 위해

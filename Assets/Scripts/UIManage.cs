@@ -13,6 +13,8 @@ public class UIManage : MonoBehaviour
     public GameObject IngameUI;
     public GameObject DebugUI;
 
+    public AudioSource GameOverAudio;
+    public AudioSource GameClearAudio;
     public Text PlanktonCountText;
 
     private void Awake()
@@ -29,29 +31,32 @@ public class UIManage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsGameOver)
-        {
-            IngameUI.transform.Find("GameOver").gameObject.SetActive(true);
-        }
-
-        else if (IsGameClear)
-        {
-            IngameUI.transform.Find("GameClear").gameObject.SetActive(true);
-        }
-
         PlanktonCountText.text = GetComponent<Generator>().GetPlanktonCount().ToString();
-
     }
 
-    public void StartGame()
+    void StartGame()
     {
         //HomeUI 비활성화 후 Ingame Scene 로드
         HomeUI.SetActive(!HomeUI.activeSelf);
         DebugUI.SetActive(!DebugUI.activeSelf);
 
         StartCoroutine(StartGameCoroutine());
-        
-  
+    }
+
+    public void GameOver()
+    {
+        IsGameOver = true;
+        IngameUI.transform.Find("GameOver").gameObject.SetActive(true);
+        IngameUI.transform.Find("RestartButton").gameObject.SetActive(true);
+        GameOverAudio.Play();
+    }
+
+    public void GameClear()
+    {
+        IsGameClear = true;
+        IngameUI.transform.Find("GameClear").gameObject.SetActive(true);
+        IngameUI.transform.Find("RestartButton").gameObject.SetActive(true);
+        GameClearAudio.Play();
     }
 
     IEnumerator StartGameCoroutine()
@@ -84,5 +89,18 @@ public class UIManage : MonoBehaviour
     void DebugTimex5()
     {
         GetComponent<Generator>().SetSlimeSpeed(25);
+    }
+
+    public void OnRestart()
+    {
+        foreach(Transform child in IngameUI.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        IsGameOver = false;
+        IsGameClear = false;
+
+        SceneManager.LoadScene("Home");
     }
 }

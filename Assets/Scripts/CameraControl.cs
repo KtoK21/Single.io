@@ -24,7 +24,6 @@ public class CameraControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(minBound.x + halfWidth);
         Xclamp = Mathf.Clamp(transform.parent.transform.position.x, minBound.x + halfWidth, maxBound.x - halfWidth);
 
         Yclamp = Mathf.Clamp(transform.parent.transform.position.y, minBound.y + halfHeight, maxBound.y - halfHeight);

@@ -23,22 +23,24 @@ public class SlimeMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //플레이어 슬라임이면 키보드 이동 함수를  실행
-        if (transform.tag == "Player")
+        if (!UIManage.IsGameOver && !UIManage.IsGameClear)
         {
-            Destination = PlayerDestination();
-            PlayerMove(Destination);
-        }
-        else
-        {
-            if (transform.position == Destination)
+            //플레이어 슬라임이면 키보드 이동 함수를  실행
+            if (transform.tag == "Player")
             {
-                IsTargeting = false;
-                Destination = RandomDestination();
+                Destination = PlayerDestination();
+                PlayerMove(Destination);
             }
-            AIMove(Destination);
+            else
+            {
+                if (transform.position == Destination)
+                {
+                    IsTargeting = false;
+                    Destination = RandomDestination();
+                }
+                AIMove(Destination);
+            }
         }
-
     }
 
     void PlayerMove(Vector3 _Destination)

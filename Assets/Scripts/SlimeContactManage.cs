@@ -26,17 +26,17 @@ public class SlimeContactManage : MonoBehaviour
                 //본인이 플레이어면 게임오버 UI 활성화
                 if (transform.tag == "Player")
                 {
-                    UIManage.IsGameOver = true;
+                    GameObject.Find("GameManager").GetComponent<UIManage>().GameOver();
                 }
                 //본인이 용사면
                 else if (transform.tag == "Heroparty")
                 {
                     //플레이어가 잡아먹을 경우 게임 클리어
                     if (collision.tag == "Player")
-                        UIManage.IsGameClear = true;
+                        GameObject.Find("GameManager").GetComponent<UIManage>().GameClear();
                     //AI가 잡아먹을 경우 게임 오버
                     else
-                        UIManage.IsGameOver = true;
+                        GameObject.Find("GameManager").GetComponent<UIManage>().GameOver();
                 }
 
                 //본인이 AI면 오브젝트 삭제
